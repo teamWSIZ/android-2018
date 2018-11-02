@@ -17,8 +17,7 @@
         android:title="@string/menu_item_3"
         >
     </item>
-    <item android:id="@+id/menu_dialog_4"
-        android:title="@string/menu_item_4"
-        >
-    </item>
+    <item
+        android:id="@+id/menu_dialog_4"
+        android:title="@string/menu_item_4"></item>
 </menu>

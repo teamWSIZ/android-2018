@@ -22,4 +22,20 @@
         android:layout_height="wrap_content"
         android:text="@string/open_dilog_2"
         />
+    <View
+        android:id="@+id/text0"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#b2ebf2" />
+    <View
+        android:id="@+id/text1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text0"
+        android:layout_toRightOf="@+id/text0"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
 </RelativeLayout>
