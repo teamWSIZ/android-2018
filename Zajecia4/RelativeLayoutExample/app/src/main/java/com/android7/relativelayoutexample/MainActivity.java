@@ -79,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_dialog_2:
                 Toast.makeText(this,getString(R.string.open_dilog_2),Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.menu_dialog_3:
+                Toast.makeText(this,getString(R.string.menu_item_3),Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_dialog_4:
+                Toast.makeText(this,getString(R.string.menu_item_4),Toast.LENGTH_SHORT).show();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

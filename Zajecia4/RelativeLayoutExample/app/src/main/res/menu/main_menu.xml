@@ -3,10 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_dialog_1"
         android:title="@string/open_dilog_1"
+        android:icon="@drawable/ic_action_name1"
+        app:showAsAction="ifRoom"
         >
     </item>
     <item android:id="@+id/menu_dialog_2"
         android:title="@string/open_dilog_2"
+        android:icon="@drawable/ic_action_name2"
+        app:showAsAction="ifRoom"
+        >
+    </item>
+    <item android:id="@+id/menu_dialog_3"
+        android:title="@string/menu_item_3"
+        >
+    </item>
+    <item android:id="@+id/menu_dialog_4"
+        android:title="@string/menu_item_4"
         >
     </item>
 </menu>
