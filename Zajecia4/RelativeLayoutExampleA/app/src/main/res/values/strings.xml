@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dialogs example</string>
+    <string name="open_dilog_1">Open simple dialog</string>
+    <string name="open_dilog_2">Open custom dialog</string>
+    <string name="dialog_1_message">Dialog 1 message</string>
+    <string name="dialog_2_message">Enter text</string>
+    <string name="dialog_positive_button">Ok</string>
+    <string name="dialog_negative_button">Cancel</string>
+</resources>
