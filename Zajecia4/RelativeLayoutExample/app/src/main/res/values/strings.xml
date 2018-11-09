@@ -6,6 +6,7 @@
     <string name="dialog_2_message">Enter text</string>
     <string name="dialog_positive_button">Ok</string>
     <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_neutral_button">Add</string>
     <string name="menu_item_3">Open dialog 3</string>
     <string name="menu_item_4">Open dialog 4</string>
     <string name="dialog1_title">Simple dialog</string>

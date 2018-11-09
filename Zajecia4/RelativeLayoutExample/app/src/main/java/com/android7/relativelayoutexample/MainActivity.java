@@ -17,6 +17,47 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button button3;
 
+    private void createDialog1(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getString(R.string.dialog1_title));
+        builder.setMessage(getString(R.string.dialog_1_message));
+
+        builder.setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_negative_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.setNeutralButton(getString(R.string.dialog_neutral_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void createDialog2(){
+        CustomDialog customDialog = new CustomDialog();
+        customDialog.show(getSupportFragmentManager(),"Custom dialog");
+
+        customDialog.setOnCustomClickListener(new CustomDialog.OnCustomDialogListener() {
+            @Override
+            public void setText(String text) {
+                Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,39 +71,14 @@ public class MainActivity extends AppCompatActivity {
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle(getString(R.string.dialog1_title));
-                builder.setMessage(getString(R.string.dialog_1_message));
-                builder.setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.dialog_negative_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
+                createDialog1();
             }
         });
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialog customDialog = new CustomDialog();
-                customDialog.show(getSupportFragmentManager(),"Custom dialog");
-
-                customDialog.setOnCustomClickListener(new CustomDialog.OnCustomDialogListener() {
-                    @Override
-                    public void setText(String text) {
-                        Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
-                    }
-                });
+                createDialog2();
             }
         });
 
@@ -94,9 +110,11 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menu_dialog_1:
                 Toast.makeText(this,getString(R.string.open_dilog_1),Toast.LENGTH_SHORT).show();
+                createDialog1();
                 return true;
             case R.id.menu_dialog_2:
                 Toast.makeText(this,getString(R.string.open_dilog_2),Toast.LENGTH_SHORT).show();
+                createDialog2();
                 return true;
             case R.id.menu_dialog_3:
                 Toast.makeText(this,getString(R.string.menu_item_3),Toast.LENGTH_SHORT).show();
