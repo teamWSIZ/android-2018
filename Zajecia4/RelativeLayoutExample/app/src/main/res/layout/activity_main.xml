@@ -38,4 +38,21 @@
         android:layout_height="wrap_content"
         android:text="@string/menu_item_4"
         />
+    <View
+        android:id="@+id/view_1"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/button3"
+        android:background="#80deea"
+        />
+    <View
+        android:id="@+id/view_2"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/view_1"
+        android:layout_toRightOf="@id/view_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
 </RelativeLayout>
