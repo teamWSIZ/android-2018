@@ -14,6 +14,7 @@ import android.widget.EditText;
 public class CustomDialog extends DialogFragment {
     public interface OnCustomDialogListener{
         void setText(String text);
+        void setValue(Double value);
     }
 
     OnCustomDialogListener mListener;

@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(MainActivity.this,"OK clicked",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void setText(String text) {
                 Toast.makeText(MainActivity.this,text,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void setValue(Double value) {
+
             }
         });
     }

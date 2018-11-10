@@ -7,5 +7,48 @@
         android:id="@+id/edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view_1"
+        android:layout_centerHorizontal="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/edit_text"
+        android:background="#80deea"
+        />
+    <View
+        android:id="@+id/view_2"
+        android:layout_alignTop="@id/view_1"
+        android:layout_toRightOf="@id/view_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
+    <View
+        android:id="@+id/view_3"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/view_1"
+        android:layout_toRightOf="@id/view_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
+    <View
+        android:id="@+id/view_4"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/view_1"
+        android:layout_below="@id/view_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
+    <View
+        android:id="@+id/view_5"
+        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@id/view_1"
+        android:layout_below="@id/view_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#b9f6ca"
+        />
 
 </RelativeLayout>
