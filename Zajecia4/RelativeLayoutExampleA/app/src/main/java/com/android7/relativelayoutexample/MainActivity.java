@@ -15,6 +15,26 @@ public class MainActivity extends AppCompatActivity {
     Button button0;
     Button button1;
 
+    private void openDialog_0(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(getString(R.string.dialog_1_message));
+        builder.setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_negative_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,23 +46,7 @@ public class MainActivity extends AppCompatActivity {
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage(getString(R.string.dialog_1_message));
-                builder.setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.dialog_negative_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
+                openDialog_0();
             }
         });
     }
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menu_dialog_1:
                 Toast.makeText(this,getString(R.string.open_dilog_1),Toast.LENGTH_SHORT).show();
+                openDialog_0();
                 return true;
             case R.id.menu_dialog_2:
                 Toast.makeText(this,getString(R.string.open_dilog_2),Toast.LENGTH_SHORT).show();
