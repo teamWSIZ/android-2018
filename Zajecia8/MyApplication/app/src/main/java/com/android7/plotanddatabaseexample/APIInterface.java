@@ -6,6 +6,6 @@ import retrofit2.http.Query;
 
 interface APIInterface {
 
-    @GET("/servtmp?")
+    @GET("/json?")
     Call<Temperature> getWSIZTemperature(@Query("limit") int no);
 }
