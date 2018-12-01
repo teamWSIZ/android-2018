@@ -1,4 +1,4 @@
-package com.android7.plotanddatabaseexample;
+package com.android7.plotanddatabaseexamplea;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,11 +17,11 @@ import retrofit2.Response;
  */
 public class MainActivityFragment extends Fragment {
 
-    public MainActivityFragment() {
-    }
-
     GraphView mGraphView;
     APIInterface apiInterface;
+
+    public MainActivityFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
