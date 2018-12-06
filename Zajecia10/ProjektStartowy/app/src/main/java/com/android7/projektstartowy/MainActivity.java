@@ -1,12 +1,46 @@
-package com.android7.plotanddatabaseexamplea;
+package com.android7.projektstartowy;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+
+    private ArrayList<Fragment> mFragments;
+
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "page "+(position+1);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mFragments = new ArrayList<Fragment>();
+
+        mFragments.add(new Fragment1());
+        mFragments.add(new Fragment2());
+
+        mPager = (ViewPager)findViewById(R.id.viewpager);
+        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+
+        mPager.setAdapter(mPagerAdapter);
     }
 
     @Override
