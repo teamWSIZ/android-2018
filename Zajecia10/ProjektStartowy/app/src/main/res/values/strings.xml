@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ProjektStartowy</string>
     <string name="action_settings">Settings</string>
+    <string name="excercise_1">Zadanie 1</string>
+    <string name="excercise_2">Zadanie 2</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
