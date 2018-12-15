@@ -2,13 +2,17 @@ package com.android7.plotanddatabaseexamplea;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,18 +53,19 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void getTemperatureData(){
-        Call<Temperature> call = apiInterface.getWSIZTemperature(10);
+        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(10);
 
-        call.enqueue(new Callback<Temperature>() {
+        call.enqueue(new Callback<List<DataElement>>() {
             @Override
-            public void onResponse(Call<Temperature> call, Response<Temperature> response) {
-                Temperature temperature = response.body();
-
+            public void onResponse(Call<List<DataElement>> call, Response<List<DataElement>> response) {
+                List<DataElement> data = response.body();
             }
 
             @Override
-            public void onFailure(Call<Temperature> call, Throwable t) {
+            public void onFailure(Call<List<DataElement>> call, Throwable t) {
+                Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
 
+                Log.v("Retrofit",t.toString());
             }
         });
     }
