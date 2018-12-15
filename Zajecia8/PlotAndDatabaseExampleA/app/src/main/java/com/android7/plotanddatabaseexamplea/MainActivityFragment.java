@@ -34,7 +34,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
+        mGraphView = (GraphView) view.findViewById(R.id.graph);
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
@@ -43,7 +43,7 @@ public class MainActivityFragment extends Fragment {
                 new DataPoint(3, 2),
                 new DataPoint(4, 6),
         });
-        graph.addSeries(series);
+        mGraphView.addSeries(series);
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
@@ -53,12 +53,22 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void getTemperatureData(){
-        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(10);
+        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(100);
 
         call.enqueue(new Callback<List<DataElement>>() {
             @Override
             public void onResponse(Call<List<DataElement>> call, Response<List<DataElement>> response) {
                 List<DataElement> data = response.body();
+
+                LineGraphSeries<DataPoint> temperature0 = new LineGraphSeries<DataPoint>();
+
+
+                for(int i=0;i<data.size();i++)
+                    temperature0.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
+
+
+                mGraphView.addSeries(temperature0);
+
             }
 
             @Override
