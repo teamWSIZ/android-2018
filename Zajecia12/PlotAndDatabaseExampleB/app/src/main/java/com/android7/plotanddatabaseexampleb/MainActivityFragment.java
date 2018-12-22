@@ -1,5 +1,6 @@
 package com.android7.plotanddatabaseexampleb;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -38,36 +39,37 @@ public class MainActivityFragment extends Fragment {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        getTemperatureData();
+        mGraphView.addSeries(getTemperatureData(Color.BLUE, 100,1));
+        mGraphView.addSeries(getTemperatureData(Color.RED, 100,2));
 
         return view;
     }
 
-    public void getTemperatureData(){
-        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(100);
+    public LineGraphSeries<DataPoint> getTemperatureData(int color, int limit, int sensor){
+        Call<List<Temperature>> call = apiInterface.getWSIZTemperature(limit,sensor);
 
-        call.enqueue(new Callback<List<DataElement>>() {
+        final LineGraphSeries<DataPoint> temperature = new LineGraphSeries<DataPoint>();
+        temperature.setColor(color);
+
+        call.enqueue(new Callback<List<Temperature>>() {
             @Override
-            public void onResponse(Call<List<DataElement>> call, Response<List<DataElement>> response) {
-                List<DataElement> data = response.body();
-
-                LineGraphSeries<DataPoint> temperature0 = new LineGraphSeries<DataPoint>();
+            public void onResponse(Call<List<Temperature>> call, Response<List<Temperature>> response) {
+                List<Temperature> data = response.body();
 
 
                 for(int i=0;i<data.size();i++)
-                    temperature0.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
-
-
-                mGraphView.addSeries(temperature0);
+                    temperature.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
 
             }
 
             @Override
-            public void onFailure(Call<List<DataElement>> call, Throwable t) {
+            public void onFailure(Call<List<Temperature>> call, Throwable t) {
                 Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
 
                 Log.v("Retrofit",t.toString());
             }
         });
+
+        return temperature;
     }
 }
