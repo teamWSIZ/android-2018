@@ -42,15 +42,17 @@ public class MainActivityFragment extends Fragment {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,100,1,1));
-        mGraphView_1.addSeries(getTemperatureData(Color.RED,100,2,2));
-        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),100,1,3));
-        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),100,2,4));
+        int limit = 1000;
 
-        mGraphView_2.addSeries(getHumidityData(Color.BLUE,100,1,1));
-        mGraphView_2.addSeries(getHumidityData(Color.RED,100,2,1));
-        mGraphView_2.addSeries(getHumidityData(getResources().getColor(R.color.plotGreen),100,1,3));
-        mGraphView_2.addSeries(getHumidityData(getResources().getColor(R.color.plotOrange),100,2,4));
+        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,1,1));
+        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,2,2));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,1,3));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,2,4));
+
+        mGraphView_2.addSeries(getHumidityData(Color.BLUE,limit,1,1));
+        mGraphView_2.addSeries(getHumidityData(Color.RED,limit,2,1));
+        mGraphView_2.addSeries(getHumidityData(getResources().getColor(R.color.plotGreen),limit,1,3));
+        mGraphView_2.addSeries(getHumidityData(getResources().getColor(R.color.plotOrange),limit,2,4));
 
         return view;
     }
