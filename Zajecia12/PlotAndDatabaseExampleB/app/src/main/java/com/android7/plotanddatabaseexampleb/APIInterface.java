@@ -10,4 +10,7 @@ interface APIInterface {
 
     @GET("/json?")
     Call<List<Temperature>> getTemperature(@Query("limit") int limit, @Query("sensor") int sensor);
+
+    @GET("/json?")
+    Call<List<Humidity>> getHumidity(@Query("limit") int limit, @Query("sensor") int sensor);
 }
