@@ -24,7 +24,9 @@ import retrofit2.Response;
  */
 public class MainActivityFragment extends Fragment {
 
-    GraphView mGraphView;
+    GraphView mGraphView_1;
+    GraphView mGraphView_2;
+
     APIInterface apiInterface;
 
     public MainActivityFragment() {
@@ -35,18 +37,23 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        mGraphView = (GraphView) view.findViewById(R.id.graph);
+        mGraphView_1 = (GraphView) view.findViewById(R.id.graph_1);
+        mGraphView_2 = (GraphView) view.findViewById(R.id.graph_2);
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        mGraphView.addSeries(getTemperatureData(Color.BLUE, 100,1));
-        mGraphView.addSeries(getTemperatureData(Color.RED, 100,2));
+        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,100,1,1));
+        mGraphView_1.addSeries(getTemperatureData(Color.RED,100,2,1));
+
+        mGraphView_2.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),100,1,3.5));
+        mGraphView_2.addSeries(getTemperatureData(Color.BLUE,100,3,1));
+        mGraphView_2.addSeries(getTemperatureData(Color.RED,100,4,1));
 
         return view;
     }
 
-    public LineGraphSeries<DataPoint> getTemperatureData(int color, int limit, int sensor){
-        Call<List<Temperature>> call = apiInterface.getWSIZTemperature(limit,sensor);
+    public LineGraphSeries<DataPoint> getTemperatureData(int color, int limit, int sensor, final double mul){
+        Call<List<Temperature>> call = apiInterface.getTemperature(limit,sensor);
 
         final LineGraphSeries<DataPoint> temperature = new LineGraphSeries<DataPoint>();
         temperature.setColor(color);
@@ -56,9 +63,8 @@ public class MainActivityFragment extends Fragment {
             public void onResponse(Call<List<Temperature>> call, Response<List<Temperature>> response) {
                 List<Temperature> data = response.body();
 
-
                 for(int i=0;i<data.size();i++)
-                    temperature.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
+                    temperature.appendData(new DataPoint(i++,data.get(i).temperature*mul),false,data.size());
 
             }
 
