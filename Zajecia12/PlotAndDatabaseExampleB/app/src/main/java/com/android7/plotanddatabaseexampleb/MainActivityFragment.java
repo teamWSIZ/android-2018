@@ -44,7 +44,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void getTemperatureData(){
-        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(100,2);
+        Call<List<DataElement>> call = apiInterface.getWSIZTemperature(100);
 
         call.enqueue(new Callback<List<DataElement>>() {
             @Override

@@ -9,5 +9,5 @@ import retrofit2.http.Query;
 interface APIInterface {
 
     @GET("/json?")
-    Call<List<DataElement>> getWSIZTemperature(@Query("limit") int no, @Query("sensor") int sensor);
+    Call<List<DataElement>> getWSIZTemperature(@Query("limit") int no);
 }
