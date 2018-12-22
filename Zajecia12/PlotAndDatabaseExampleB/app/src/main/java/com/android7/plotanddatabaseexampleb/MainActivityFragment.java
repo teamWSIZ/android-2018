@@ -1,4 +1,4 @@
-package com.android7.plotanddatabaseexamplea;
+package com.android7.plotanddatabaseexampleb;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
