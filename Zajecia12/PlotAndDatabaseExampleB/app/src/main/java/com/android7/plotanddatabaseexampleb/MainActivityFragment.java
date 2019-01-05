@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -30,6 +32,8 @@ public class MainActivityFragment extends Fragment {
     APIInterface apiInterface;
 
     public MainActivityFragment() {
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -146,5 +150,12 @@ public class MainActivityFragment extends Fragment {
         });
 
         return temperature;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_graph,menu);
     }
 }
