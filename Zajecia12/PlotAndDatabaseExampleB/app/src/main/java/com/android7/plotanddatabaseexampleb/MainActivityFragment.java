@@ -62,35 +62,6 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
-    private Double getMaxTemperature(List<Temperature> temperatures){
-
-        if(temperatures.size()<=0)
-            return null;
-
-        double maxTemp = 1;
-
-        for(Temperature temp0:temperatures){
-            if(temp0.temperature>maxTemp)
-                maxTemp = temp0.temperature;
-        }
-
-        return maxTemp;
-    }
-
-    private Double getMaxHumidity(List<Humidity> humidities){
-
-        if(humidities.size()<=0)
-            return null;
-
-        double maxHumidity = 1;
-
-        for(Humidity humidity:humidities){
-            if(humidity.humidity>maxHumidity)
-                maxHumidity = humidity.humidity;
-        }
-
-        return maxHumidity;
-    }
 
     public LineGraphSeries<DataPoint> getTemperatureData(int color, int limit, int sensor, final boolean normData){
         Call<List<Temperature>> call = apiInterface.getTemperature(limit,sensor);
@@ -103,13 +74,9 @@ public class MainActivityFragment extends Fragment {
             public void onResponse(Call<List<Temperature>> call, Response<List<Temperature>> response) {
                 List<Temperature> data = response.body();
 
-                double maxTemperature = 1.0;
-
-                if(normData)
-                    maxTemperature = getMaxTemperature(data);
 
                 for(int i=0;i<data.size();i++)
-                    temperature.appendData(new DataPoint(i++,data.get(i).temperature/maxTemperature),false,data.size());
+                    temperature.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
 
             }
 
@@ -135,13 +102,8 @@ public class MainActivityFragment extends Fragment {
             public void onResponse(Call<List<Humidity>> call, Response<List<Humidity>> response) {
                 List<Humidity> data = response.body();
 
-                double maxHumidity= 1.0;
-
-                if(normData)
-                    maxHumidity = getMaxHumidity(data);
-
                 for(int i=0;i<data.size();i++)
-                    temperature.appendData(new DataPoint(i++,data.get(i).humidity/maxHumidity),false,data.size());
+                    temperature.appendData(new DataPoint(i++,data.get(i).humidity),false,data.size());
 
             }
 
