@@ -47,6 +47,12 @@ public class MainActivityFragment extends Fragment {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
+        loadData();
+
+        return view;
+    }
+
+    private void loadData(){
         int limit = 100;
 
         mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,1,false));
@@ -56,16 +62,11 @@ public class MainActivityFragment extends Fragment {
 
         mGraphView_2.addSeries(getTemperatureData(Color.BLUE,limit,1,true));
         mGraphView_2.addSeries(getHumidityData(Color.RED,limit,1,true));
-
-        return view;
-    }
-
-    private void loadData(){
-
     }
 
     private void clearPlot(){
-
+        mGraphView_1.removeAllSeries();
+        mGraphView_2.removeAllSeries();
     }
 
     private double getMaxTemperatureToNorm(List<Temperature> data){
