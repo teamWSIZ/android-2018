@@ -44,10 +44,10 @@ public class MainActivityFragment extends Fragment {
 
         int limit = 100;
 
-        //mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,1,1));
-        //mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,2,2));
-        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,3,false));
-        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,4,false));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,1,true));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,2,true));
+        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,3,true));
+        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,4,true));
         //mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,3,true));
         //mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,4,true));
 
