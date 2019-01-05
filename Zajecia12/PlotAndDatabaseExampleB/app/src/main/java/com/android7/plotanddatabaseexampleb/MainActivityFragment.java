@@ -44,10 +44,10 @@ public class MainActivityFragment extends Fragment {
 
         int limit = 100;
 
-        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,1,true));
-        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,2,true));
-        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,3,true));
-        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,4,true));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,1,false));
+        mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,2,false));
+        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,3,false));
+        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,4,false));
 
         mGraphView_2.addSeries(getTemperatureData(Color.BLUE,limit,1,true));
         mGraphView_2.addSeries(getHumidityData(Color.RED,limit,1,true));
@@ -97,6 +97,9 @@ public class MainActivityFragment extends Fragment {
 
                 double tempToNorm = 1;
 
+                if(normData)
+                    tempToNorm = getMaxTemperatureToNorm(data);
+
                 for(int i=0;i<data.size();i++)
                     temperature.appendData(new DataPoint(i++,data.get(i).temperature/tempToNorm),false,data.size());
 
@@ -125,6 +128,9 @@ public class MainActivityFragment extends Fragment {
                 List<Humidity> data = response.body();
 
                 double humidityToNorm = 1;
+
+                if(normData)
+                    humidityToNorm = getMaxHumidityToNorm(data);
 
                 for(int i=0;i<data.size();i++)
                     temperature.appendData(new DataPoint(i++,data.get(i).humidity/humidityToNorm),false,data.size());
