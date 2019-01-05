@@ -62,40 +62,6 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
-    public double maxTemperatureToNorm(List<Temperature> temperatureList){
-
-        if(temperatureList.size()<0)
-            return 1;
-
-        double maxTemperature = temperatureList.get(0).temperature;
-
-        for(Temperature dataElement: temperatureList)
-            if(Math.abs(dataElement.temperature)>maxTemperature)
-                maxTemperature = Math.abs(dataElement.temperature);
-
-        if(maxTemperature==0)
-            return 0;
-
-        return maxTemperature;
-    }
-
-    public double maxHumidityToNorm(List<Humidity> humidityList){
-
-        if(humidityList.size()<0)
-            return 1;
-
-        double maxHumidity = humidityList.get(0).humidity;
-
-        for(Humidity dataElement: humidityList)
-            if(dataElement.humidity>maxHumidity)
-                maxHumidity = dataElement.humidity;
-
-        if(maxHumidity==0)
-            return 0;
-
-        return maxHumidity;
-    }
-
 
     public LineGraphSeries<DataPoint> getTemperatureData(int color, int limit, int sensor, final boolean normData){
         Call<List<Temperature>> call = apiInterface.getTemperature(limit,sensor);
@@ -108,14 +74,8 @@ public class MainActivityFragment extends Fragment {
             public void onResponse(Call<List<Temperature>> call, Response<List<Temperature>> response) {
                 List<Temperature> data = response.body();
 
-                double maxTempToNorm = 1;
-
-                if(normData)
-                    maxTempToNorm = maxTemperatureToNorm(data);
-
-
                 for(int i=0;i<data.size();i++)
-                    temperature.appendData(new DataPoint(i++,data.get(i).temperature/maxTempToNorm),false,data.size());
+                    temperature.appendData(new DataPoint(i++,data.get(i).temperature),false,data.size());
 
             }
 
@@ -141,13 +101,8 @@ public class MainActivityFragment extends Fragment {
             public void onResponse(Call<List<Humidity>> call, Response<List<Humidity>> response) {
                 List<Humidity> data = response.body();
 
-                double maxHumidityToNorm = 1;
-
-                if(normData)
-                    maxHumidityToNorm = maxHumidityToNorm(data);
-
                 for(int i=0;i<data.size();i++)
-                    temperature.appendData(new DataPoint(i++,data.get(i).humidity/maxHumidityToNorm),false,data.size());
+                    temperature.appendData(new DataPoint(i++,data.get(i).humidity),false,data.size());
 
             }
 
