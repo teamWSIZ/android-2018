@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -57,6 +58,14 @@ public class MainActivityFragment extends Fragment {
         mGraphView_2.addSeries(getHumidityData(Color.RED,limit,1,true));
 
         return view;
+    }
+
+    private void loadData(){
+
+    }
+
+    private void clearPlot(){
+
     }
 
     private double getMaxTemperatureToNorm(List<Temperature> data){
@@ -157,5 +166,24 @@ public class MainActivityFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.menu_graph,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id){
+            case R.id.action_reload:
+                loadData();
+                return true;
+            case R.id.action_clear:
+                clearPlot();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
