@@ -46,8 +46,8 @@ public class MainActivityFragment extends Fragment {
 
         //mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,1,1));
         //mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,2,2));
-        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,3,true));
-        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,4,true));
+        mGraphView_1.addSeries(getTemperatureData(Color.RED,limit,3,true));
+        mGraphView_1.addSeries(getTemperatureData(Color.BLUE,limit,4,true));
         //mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotGreen),limit,3,true));
         //mGraphView_1.addSeries(getTemperatureData(getResources().getColor(R.color.plotOrange),limit,4,true));
 
@@ -60,6 +60,40 @@ public class MainActivityFragment extends Fragment {
         //mGraphView_2.addSeries(getHumidityData(getResources().getColor(R.color.plotOrange),limit,2,4));
 
         return view;
+    }
+
+    public double maxTemperatureToNorm(List<Temperature> temperatureList){
+
+        if(temperatureList.size()<0)
+            return 1;
+
+        double maxTemperature = temperatureList.get(0).temperature;
+
+        for(Temperature dataElement: temperatureList)
+            if(maxTemperature>Math.abs(dataElement.temperature))
+                maxTemperature = Math.abs(dataElement.temperature);
+
+        if(maxTemperature==0)
+            return 0;
+
+        return maxTemperature;
+    }
+
+    public double maxHumidityToNorm(List<Humidity> humidityList){
+
+        if(humidityList.size()<0)
+            return 1;
+
+        double maxHumidity = humidityList.get(0).humidity;
+
+        for(Humidity dataElement: humidityList)
+            if(maxHumidity>dataElement.humidity)
+                maxHumidity = dataElement.humidity;
+
+        if(maxHumidity==0)
+            return 0;
+
+        return maxHumidity;
     }
 
 
