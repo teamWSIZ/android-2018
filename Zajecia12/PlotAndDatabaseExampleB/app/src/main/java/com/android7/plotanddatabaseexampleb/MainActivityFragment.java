@@ -3,6 +3,7 @@ package com.android7.plotanddatabaseexampleb;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +28,8 @@ import retrofit2.Response;
  */
 public class MainActivityFragment extends Fragment {
 
+    SwipeRefreshLayout mSwipeLayout;
+
     GraphView mGraphView_1;
     GraphView mGraphView_2;
 
@@ -41,6 +44,15 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mSwipeLayout = view.findViewById(R.id.swipe_layout);
+
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
 
         mGraphView_1 = view.findViewById(R.id.graph_1);
         mGraphView_2 = view.findViewById(R.id.graph_2);
@@ -104,6 +116,9 @@ public class MainActivityFragment extends Fragment {
         final LineGraphSeries<DataPoint> temperature = new LineGraphSeries<DataPoint>();
         temperature.setColor(color);
 
+        mSwipeLayout.setColorSchemeColors(Color.BLACK,color,Color.BLACK);
+        mSwipeLayout.setRefreshing(true);
+
         call.enqueue(new Callback<List<Temperature>>() {
             @Override
             public void onResponse(Call<List<Temperature>> call, Response<List<Temperature>> response) {
@@ -117,11 +132,15 @@ public class MainActivityFragment extends Fragment {
                 for(int i=0;i<data.size();i++)
                     temperature.appendData(new DataPoint(i++,data.get(i).temperature/tempToNorm),false,data.size());
 
+                mSwipeLayout.setRefreshing(false);
+
             }
 
             @Override
             public void onFailure(Call<List<Temperature>> call, Throwable t) {
                 Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+
+                mSwipeLayout.setRefreshing(false);
 
                 Log.v("Retrofit",t.toString());
             }
@@ -136,6 +155,9 @@ public class MainActivityFragment extends Fragment {
         final LineGraphSeries<DataPoint> temperature = new LineGraphSeries<DataPoint>();
         temperature.setColor(color);
 
+        mSwipeLayout.setColorSchemeColors(Color.BLACK,color,Color.BLACK);
+        mSwipeLayout.setRefreshing(true);
+
         call.enqueue(new Callback<List<Humidity>>() {
             @Override
             public void onResponse(Call<List<Humidity>> call, Response<List<Humidity>> response) {
@@ -149,11 +171,15 @@ public class MainActivityFragment extends Fragment {
                 for(int i=0;i<data.size();i++)
                     temperature.appendData(new DataPoint(i++,data.get(i).humidity/humidityToNorm),false,data.size());
 
+                mSwipeLayout.setRefreshing(false);
+
             }
 
             @Override
             public void onFailure(Call<List<Humidity>> call, Throwable t) {
                 Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+
+                mSwipeLayout.setRefreshing(false);
 
                 Log.v("Retrofit",t.toString());
             }
