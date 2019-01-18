@@ -13,7 +13,8 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="Ax"
+        android:textAlignment="viewEnd"
         app:layout_constraintBaseline_toBaselineOf="@+id/ax_value"
         app:layout_constraintEnd_toStartOf="@+id/ax_value"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,7 +26,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="260dp"
         android:text="TextView"
-        android:textAlignment="viewEnd"
+        android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ax_value" />
@@ -38,7 +39,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
-        android:textAlignment="viewEnd"
+        android:textAlignment="viewStart"
         app:layout_constraintBottom_toTopOf="@+id/az_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ax_value" />
@@ -51,7 +52,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="101dp"
         android:text="TextView"
-        android:textAlignment="viewEnd"
+        android:textAlignment="viewStart"
         app:layout_constraintBottom_toTopOf="@+id/az_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +63,8 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="Ay"
+        android:textAlignment="viewEnd"
         app:layout_constraintBaseline_toBaselineOf="@+id/ay_value"
         app:layout_constraintEnd_toStartOf="@+id/ay_value"
         app:layout_constraintStart_toStartOf="parent" />
@@ -73,7 +75,8 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="Az"
+        android:textAlignment="viewEnd"
         app:layout_constraintBaseline_toBaselineOf="@+id/az_value"
         app:layout_constraintEnd_toStartOf="@+id/az_value"
         app:layout_constraintStart_toStartOf="parent" />

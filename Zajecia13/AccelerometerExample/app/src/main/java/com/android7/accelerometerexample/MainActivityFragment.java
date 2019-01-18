@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -20,6 +21,10 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     SensorManager mSensorManager;
     Sensor mAccelerometer;
 
+    TextView mAxValue;
+    TextView mAyValue;
+    TextView mAzValue;
+
     public MainActivityFragment() {
 
     }
@@ -28,7 +33,13 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mAxValue = v.findViewById(R.id.ax_value);
+        mAyValue = v.findViewById(R.id.ay_value);
+        mAzValue = v.findViewById(R.id.az_value);
+
+        return v;
     }
 
     @Override
