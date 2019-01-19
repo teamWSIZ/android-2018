@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Sensor proximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
         mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this,proximity,SensorManager.SENSOR_DELAY_NORMAL);
+        //mSensorManager.registerListener(this,proximity,SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         if(sensorEvent.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
 
-            Log.d("Sensor", "accelerometer");
+            double Fx = sensorEvent.values[0];
+            double Fy = sensorEvent.values[1];
+            double Fz = sensorEvent.values[2];
 
+            Log.d("Sensor", "Fx: "+Fx+", Fy: "+Fy+", Fz: "+Fz);
 
         }
 
