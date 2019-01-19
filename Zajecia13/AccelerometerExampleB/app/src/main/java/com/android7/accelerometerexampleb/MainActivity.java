@@ -8,24 +8,37 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     SensorManager mSensorManager;
     Sensor mAccelerometer;
 
+    Sensor mProximity;
+
+    TextView mFxTextView;
+    TextView mFyTextView;
+    TextView mFzTextView;
+    TextView mProximityTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mFxTextView = findViewById(R.id.Fx_value);
+        mFyTextView = findViewById(R.id.Fy_value);
+        mFzTextView = findViewById(R.id.Fz_value);
+        mProximityTextView = findViewById(R.id.proximity_value);
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        Sensor proximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
         mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
-        //mSensorManager.registerListener(this,proximity,SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this,mProximity,SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -68,5 +81,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Log.i("Accelerometer Example","Resumed...");
         mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this,mProximity,SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
