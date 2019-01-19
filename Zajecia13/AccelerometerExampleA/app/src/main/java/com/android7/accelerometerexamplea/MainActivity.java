@@ -27,7 +27,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        Log.i("Accelerometer","Accelerometer");
+
+        Sensor sensor = sensorEvent.sensor;
+
+        if(sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+            double Ax = sensorEvent.values[0];
+            double Ay = sensorEvent.values[1];
+            double Az = sensorEvent.values[2];
+
+            Log.i("Accelerometer", "Ax: "+Ax+", Ay: "+Ay+", Az: "+Az);
+
+        }
     }
 
     @Override
