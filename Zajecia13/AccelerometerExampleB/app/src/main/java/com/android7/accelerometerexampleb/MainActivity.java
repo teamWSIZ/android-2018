@@ -52,12 +52,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             Log.d("Sensor", "Fx: "+Fx+", Fy: "+Fy+", Fz: "+Fz);
 
+            mFxTextView.setText(""+Fx);
+            mFyTextView.setText(""+Fy);
+            mFzTextView.setText(""+Fz);
+
         }
 
         if(sensorEvent.sensor.getType()==Sensor.TYPE_PROXIMITY) {
 
             double proximity = sensorEvent.values[0];
             Log.d("Sensor", "proximity:"+proximity);
+
+            mProximityTextView.setText(""+proximity);
         }
 
 
