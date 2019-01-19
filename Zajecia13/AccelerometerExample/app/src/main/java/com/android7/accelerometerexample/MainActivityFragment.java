@@ -61,6 +61,10 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
             double y = sensorEvent.values[1];
             double z = sensorEvent.values[2];
 
+            mAxValue.setText(""+x);
+            mAyValue.setText(""+y);
+            mAzValue.setText(""+z);
+
             Log.d("Akcelerometr","x:"+x+", y:"+y+", z:"+z);
         }
 
