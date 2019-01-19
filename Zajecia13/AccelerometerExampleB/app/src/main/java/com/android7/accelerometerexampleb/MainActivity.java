@@ -14,18 +14,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     SensorManager mSensorManager;
     Sensor mAccelerometer;
 
-    SensorEventListener mAcceleremeterListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            Log.d("Sensor","Accelerometer listener 2");
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,18 +22,48 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        Sensor proximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
         mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(mAcceleremeterListener,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this,proximity,SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        Log.d("Sensor","accelerometer");
+        if(sensorEvent.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+
+            Log.d("Sensor", "accelerometer");
+
+
+        }
+
+        if(sensorEvent.sensor.getType()==Sensor.TYPE_PROXIMITY) {
+
+            double proximity = sensorEvent.values[0];
+            Log.d("Sensor", "proximity:"+proximity);
+        }
+
+
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mSensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.i("Accelerometer Example","Resumed...");
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
