@@ -20,13 +20,20 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     private SensorManager mSensorManager;
     private Sensor mOrientationSensor;
 
+    private CompassView mCompassView;
+
     public MainActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+
+        mCompassView = new CompassView(getContext());
+
+        return mCompassView;
+
+        //return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
@@ -41,9 +48,9 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float azimut = (float)(sensorEvent.values[0]*180/Math.PI);
+        float azimuth = (float)(sensorEvent.values[0]*180/Math.PI);
 
-        Log.i("Compass","Compass:"+azimut);
+        Log.i("Compass","Compass:"+azimuth);
     }
 
     @Override
