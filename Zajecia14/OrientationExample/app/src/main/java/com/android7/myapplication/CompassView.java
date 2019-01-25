@@ -1,6 +1,8 @@
 package com.android7.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,11 +15,15 @@ public class CompassView extends View {
     Paint mPaint;
     float mAzimuth = 0;
 
+    Bitmap mCompassBitmap;
+
     private void init(){
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE);
         mPaint.setStrokeWidth(5);
         mPaint.setAntiAlias(true);
+
+        mCompassBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_compass_view);
     }
 
     public CompassView(Context context) {
@@ -52,6 +58,8 @@ public class CompassView extends View {
                 ycenter,
                 xcenter + radius * (float)Math.sin(-mAzimuth / 180 * Math.PI),
                 (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);
+
+        canvas.drawBitmap(mCompassBitmap,0,0,null);
 
     }
 
