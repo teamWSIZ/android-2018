@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.View;
 
 public class CompassView extends View {
@@ -11,14 +13,23 @@ public class CompassView extends View {
     Paint mPaint;
     float mAzimuth = 0;
 
-    public CompassView(Context context) {
-        super(context);
-
+    private void init(){
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE);
         mPaint.setStrokeWidth(5);
         mPaint.setAntiAlias(true);
+    }
 
+    public CompassView(Context context) {
+        super(context);
+
+        init();
+    }
+
+    public CompassView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
     }
 
     @Override
@@ -42,5 +53,11 @@ public class CompassView extends View {
                 xcenter + radius * (float)Math.sin(-mAzimuth / 180 * Math.PI),
                 (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);
 
+    }
+
+    public void update(float azimuth){
+        mAzimuth = azimuth;
+
+        invalidate();
     }
 }

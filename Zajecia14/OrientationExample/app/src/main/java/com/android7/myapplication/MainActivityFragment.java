@@ -29,11 +29,11 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mCompassView = new CompassView(getContext());
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        return mCompassView;
+        mCompassView = view.findViewById(R.id.compass_view);
 
-        //return inflater.inflate(R.layout.fragment_main, container, false);
+        return view;
     }
 
     @Override
@@ -51,6 +51,8 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
         float azimuth = (float)(sensorEvent.values[0]*180/Math.PI);
 
         Log.i("Compass","Compass:"+azimuth);
+
+        mCompassView.update(-azimuth);
     }
 
     @Override
