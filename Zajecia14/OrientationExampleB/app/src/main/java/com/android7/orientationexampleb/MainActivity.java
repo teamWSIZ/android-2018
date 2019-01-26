@@ -14,10 +14,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mOrientationSensor;
 
+    private CompassView mCompassView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        mCompassView = new CompassView(this);
+
+        setContentView(mCompassView);
+
+        //setContentView(R.layout.activity_main);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mOrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
