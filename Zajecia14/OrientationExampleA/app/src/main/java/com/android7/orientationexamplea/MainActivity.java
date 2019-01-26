@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        float azimuth = (float)(sensorEvent.values[0]*180/Math.PI);
+        float azimuth = (float)(sensorEvent.values[0]);
 
         mCompassView.update(azimuth);
 
