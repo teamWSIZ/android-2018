@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
+        float azimuth = (float)(sensorEvent.values[0]*180/Math.PI);
+
+        Log.i("Compass","Compass: "+azimuth);
 
     }
 
