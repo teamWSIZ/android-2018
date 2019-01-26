@@ -9,6 +9,7 @@ import android.view.View;
 public class CompassView extends View {
 
     private Paint mPaint;
+    private float mAzimuth = 0;
 
     public CompassView(Context context) {
         super(context);
@@ -23,6 +24,29 @@ public class CompassView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawRect(0,0,200,200,mPaint);
+        int xcenter = getMeasuredWidth() / 2;
+        int ycenter = getMeasuredHeight() / 2;
+
+        float radius = (float) (Math.min(xcenter, ycenter) * 0.7);
+
+        mPaint.setColor(Color.WHITE);
+        canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+
+        mPaint.setColor(Color.GRAY);
+        canvas.drawCircle(xcenter, ycenter, radius, mPaint);
+
+        mPaint.setColor(Color.BLUE);
+
+        canvas.drawLine(
+                xcenter,
+                ycenter,
+                xcenter + radius * (float)Math.sin(-mAzimuth),
+                (ycenter - radius * (float)Math.cos(-mAzimuth)), mPaint);
+    }
+
+    public void update(float azimuth){
+        mAzimuth = azimuth;
+
+        invalidate();
     }
 }
