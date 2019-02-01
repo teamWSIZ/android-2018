@@ -59,7 +59,7 @@ public class CompassView extends View {
                 xcenter + radius * (float)Math.sin(-mAzimuth / 180 * Math.PI),
                 (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);
 
-        canvas.drawBitmap(mCompassBitmap,0,0,null);
+        //canvas.drawBitmap(mCompassBitmap,0,0,null);
 
     }
 
