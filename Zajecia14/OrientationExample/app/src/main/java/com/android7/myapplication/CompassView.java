@@ -62,9 +62,10 @@ public class CompassView extends View {
 
 
         for(int angle = 0;angle<360;angle+=10) {
-            canvas.rotate(45);
+            canvas.rotate(angle);
             canvas.translate(-100,-100);
             canvas.drawRect(new Rect(0, 0, 200, 200), mPaint);
+            canvas.translate(100,100);
         }
 
         mPaint.setColor(Color.GRAY);
