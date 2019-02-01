@@ -49,19 +49,19 @@ public class CompassView extends View {
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
 
+        canvas.translate((getMeasuredWidth()-2*radius)/2,(getMeasuredHeight()-2*radius)/2);
         canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,(int)(2*radius),(int)(2*radius)),null);
-        //canvas.drawBitmap(mCompassBitmap,0,0,null);
-
+        
         mPaint.setColor(Color.GRAY);
-        canvas.drawCircle(xcenter, ycenter, radius, mPaint);
+        //canvas.drawCircle(xcenter, ycenter, radius, mPaint);
 
         mPaint.setColor(Color.BLUE);
 
-        canvas.drawLine(
+        /*canvas.drawLine(
                 xcenter,
                 ycenter,
                 xcenter + radius * (float)Math.sin(-mAzimuth / 180 * Math.PI),
-                (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);
+                (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);*/
 
     }
 
