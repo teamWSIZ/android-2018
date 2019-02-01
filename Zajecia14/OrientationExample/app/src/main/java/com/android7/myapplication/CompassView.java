@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -23,7 +24,7 @@ public class CompassView extends View {
         mPaint.setStrokeWidth(5);
         mPaint.setAntiAlias(true);
 
-        mCompassBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_compass_view);
+        mCompassBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.compass);
     }
 
     public CompassView(Context context) {
@@ -48,6 +49,9 @@ public class CompassView extends View {
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
 
+        canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,(int)(2*radius),(int)(2*radius)),null);
+        //canvas.drawBitmap(mCompassBitmap,0,0,null);
+
         mPaint.setColor(Color.GRAY);
         canvas.drawCircle(xcenter, ycenter, radius, mPaint);
 
@@ -58,8 +62,6 @@ public class CompassView extends View {
                 ycenter,
                 xcenter + radius * (float)Math.sin(-mAzimuth / 180 * Math.PI),
                 (ycenter - radius * (float)Math.cos(-mAzimuth / 180 * Math.PI)), mPaint);
-
-        //canvas.drawBitmap(mCompassBitmap,0,0,null);
 
     }
 
