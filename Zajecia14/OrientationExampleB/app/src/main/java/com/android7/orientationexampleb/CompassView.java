@@ -40,11 +40,11 @@ public class CompassView extends View {
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, width, height, mPaint);
 
-        int r = (int)(Math.min(width / 2, height / 2) * 0.8f);
+        int r = (int)(Math.min(width / 2, height / 2) * 0.95f);
 
         canvas.translate(xcenter,ycenter);
 
-        canvas.rotate(45);
+        canvas.rotate(mAzimuth);
 
         canvas.translate(-r,-r);
 
