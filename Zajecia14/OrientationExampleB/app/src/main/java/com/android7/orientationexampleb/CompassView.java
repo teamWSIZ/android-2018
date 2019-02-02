@@ -38,35 +38,17 @@ public class CompassView extends View {
         float ycenter = height / 2;
 
         mPaint.setColor(Color.WHITE);
-        //canvas.drawRect(0, 0, width, height, mPaint);
-
-
-        mPaint.setColor(Color.GRAY);
+        canvas.drawRect(0, 0, width, height, mPaint);
 
         int r = (int)(Math.min(width / 2, height / 2) * 0.8f);
 
-        /*canvas.save();
+        canvas.translate(xcenter,ycenter);
 
-        canvas.translate(xcenter, ycenter);
-        canvas.drawCircle(0, 0, r, mPaint);
+        canvas.rotate(45);
 
-        canvas.restore();*/
-
-        canvas.save();
-
-        canvas.translate((width-2*r)/2,(height-2*r)/2);
+        canvas.translate(-r,-r);
 
         canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,2*r,2*r),null);
-
-        canvas.restore();
-
-        mPaint.setColor(Color.BLUE);
-
-        canvas.drawRect(new Rect(0,0,200,200),mPaint);
-
-
-        /*canvas.drawLine(xcenter, ycenter, xcenter + radius * (float) Math.cos(mAzimuth),
-                ycenter + radius * (float) Math.sin(mAzimuth), mPaint);*/
     }
 
     public void update(float azimuth){
