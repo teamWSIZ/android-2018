@@ -37,39 +37,19 @@ public class CompassView extends View {
         int w = getMeasuredWidth();
         int h = getMeasuredHeight();
 
-        int r = (int) (Math.min(xcenter, ycenter) * 0.7);
-
-        mPaint.setColor(Color.GRAY);
-        canvas.drawCircle(xcenter, ycenter, r, mPaint);
+        int r = (int) (Math.min(xcenter, ycenter) * 0.9);
 
         canvas.save();
 
-        canvas.translate((w-2*r)/2,(h-2*r)/2);
+        canvas.translate(xcenter,ycenter);
+        canvas.rotate(mAzimuth);
+
+        canvas.translate(-r,-r);
+
         canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,2*r,2*r),null);
 
         canvas.restore();
 
-        mPaint.setColor(Color.GREEN);
-
-        canvas.drawRect(new Rect(0,0,200,200),mPaint);
-
-        canvas.translate(xcenter,ycenter);
-
-        canvas.drawRect(new Rect(0,0,200,200),mPaint);
-
-        canvas.rotate(45);
-
-        mPaint.setColor(Color.BLUE);
-
-        canvas.drawRect(new Rect(0,0,200,200),mPaint);
-
-        mPaint.setColor(Color.YELLOW);
-
-        canvas.translate(-100,-100);
-
-        canvas.drawRect(new Rect(0,0,200,200),mPaint);
-
-        mPaint.setColor(Color.WHITE);
         //canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
 
         /*mPaint.setColor(Color.BLUE);
