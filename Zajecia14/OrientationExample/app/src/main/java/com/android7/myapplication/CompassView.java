@@ -44,7 +44,7 @@ public class CompassView extends View {
         int xcenter = getMeasuredWidth() / 2;
         int ycenter = getMeasuredHeight() / 2;
 
-        float radius = (float) (Math.min(xcenter, ycenter) * 0.98);
+        float radius = (float) (Math.min(xcenter, ycenter) );
 
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
