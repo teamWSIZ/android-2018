@@ -45,12 +45,12 @@ public class CompassView extends View {
 
         int r = (int)(Math.min(width / 2, height / 2) * 0.8f);
 
-        canvas.save();
+        /*canvas.save();
 
         canvas.translate(xcenter, ycenter);
         canvas.drawCircle(0, 0, r, mPaint);
 
-        canvas.restore();
+        canvas.restore();*/
 
         canvas.save();
 
@@ -62,7 +62,8 @@ public class CompassView extends View {
 
         mPaint.setColor(Color.BLUE);
 
-        canvas.translate(-xcenter, -ycenter);
+        canvas.drawRect(new Rect(0,0,200,200),mPaint);
+
 
         /*canvas.drawLine(xcenter, ycenter, xcenter + radius * (float) Math.cos(mAzimuth),
                 ycenter + radius * (float) Math.sin(mAzimuth), mPaint);*/
