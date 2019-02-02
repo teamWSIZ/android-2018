@@ -39,6 +39,9 @@ public class CompassView extends View {
 
         int r = (int) (Math.min(xcenter, ycenter) * 0.9);
 
+        mPaint.setColor(Color.WHITE);
+        canvas.drawRect(new Rect(0,0,getMeasuredWidth(),getMeasuredHeight()),mPaint);
+
         canvas.save();
 
         canvas.translate(xcenter,ycenter);
