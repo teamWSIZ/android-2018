@@ -49,6 +49,26 @@ public class CompassView extends View {
 
         canvas.restore();
 
+        mPaint.setColor(Color.GREEN);
+
+        canvas.drawRect(new Rect(0,0,200,200),mPaint);
+
+        canvas.translate(xcenter,ycenter);
+
+        canvas.drawRect(new Rect(0,0,200,200),mPaint);
+
+        canvas.rotate(45);
+
+        mPaint.setColor(Color.BLUE);
+
+        canvas.drawRect(new Rect(0,0,200,200),mPaint);
+
+        mPaint.setColor(Color.YELLOW);
+
+        canvas.translate(-100,-100);
+
+        canvas.drawRect(new Rect(0,0,200,200),mPaint);
+
         mPaint.setColor(Color.WHITE);
         //canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
 
