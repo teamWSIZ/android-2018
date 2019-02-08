@@ -37,6 +37,8 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
 
     private float [] mRotationVector = new float[3];
 
+    private float mCurrentAngle = 0;
+
     public CompassSimpleFragment() {
     }
 
@@ -47,15 +49,7 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
         View view = inflater.inflate(R.layout.compass_simple, container, false);
 
         mCompassImage = view.findViewById(R.id.compass_image);
-
-        RotateAnimation rotacja = new RotateAnimation(0,360,
-                Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-
-        rotacja.setFillAfter(true);
-        rotacja.setDuration(5000);
-
-        mCompassImage.setAnimation(rotacja);
-
+        
         return view;
     }
 
@@ -98,6 +92,17 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
             SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
             SensorManager.getOrientation(mRotationMatrix,mRotationVector);
 
+            float newAngle = -(float)Math.toDegrees(mRotationVector[0]);
+
+            RotateAnimation rotacja = new RotateAnimation(mCurrentAngle,newAngle,
+                    Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
+
+            mCurrentAngle = newAngle;
+
+            rotacja.setFillAfter(true);
+            rotacja.setDuration(200);
+
+            mCompassImage.setAnimation(rotacja);
         }
 
     }
