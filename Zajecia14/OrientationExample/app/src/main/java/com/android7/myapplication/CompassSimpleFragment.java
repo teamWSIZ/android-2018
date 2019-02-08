@@ -38,6 +38,7 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
     private float [] mRotationVector = new float[3];
 
     private float mCurrentAngle = 0;
+    private boolean mAnimation = false;
 
     public CompassSimpleFragment() {
     }
@@ -99,8 +100,10 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
 
             mCurrentAngle = newAngle;
 
-            rotacja.setFillAfter(false);
-            rotacja.setDuration(500);
+            mCompassImage.clearAnimation();
+
+            rotacja.setFillAfter(true);
+            rotacja.setDuration(1000);
 
             mCompassImage.setAnimation(rotacja);
         }
