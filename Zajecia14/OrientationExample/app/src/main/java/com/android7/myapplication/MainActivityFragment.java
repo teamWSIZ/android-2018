@@ -41,18 +41,20 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
         super.onAttach(context);
 
         mSensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
+
+
         mOrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
-        mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float azimuth = (float)(sensorEvent.values[0]*180/Math.PI);
+        float azimuth = sensorEvent.values[0];
 
         Log.i("Compass","Compass:"+azimuth);
 
-        mCompassView.update(-azimuth);
+        mCompassView.update(-Math.round(azimuth));
     }
 
     @Override
