@@ -31,6 +31,10 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     private boolean mNewGravity = false;
     private boolean mNewMagneticField = false;
 
+    private float [] mRotationMatrix = new float[9];
+
+    private float [] mRotationVector = new float[3];
+
     public MainActivityFragment() {
     }
 
@@ -61,7 +65,7 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
         mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
         mSensorManager.registerListener(this, mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
 
-        mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_GAME);
+        //mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -69,10 +73,16 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
 
         switch(sensorEvent.sensor.getType()){
             case Sensor.TYPE_ACCELEROMETER:
-                Log.i("Compass","Accelerometer...");
+
+                System.arraycopy(sensorEvent.values,0,mGravity,0,3);
+                mNewGravity = true;
+
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
-                Log.i("Compass","Magnetic Field...");
+                
+                System.arraycopy(sensorEvent.values,0,mMagneticField,0,3);
+                mNewMagneticField = true;
+
                 break;
             case Sensor.TYPE_ORIENTATION:
                 //float azimuth = sensorEvent.values[0];
@@ -82,6 +92,12 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
                 break;
         }
 
+        if(mNewGravity&&mNewMagneticField){
+            SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
+            SensorManager.getOrientation(mRotationMatrix,mRotationVector);
+
+            mCompassView.update(-(float)Math.toDegrees(mRotationVector[0]));
+        }
 
     }
 
