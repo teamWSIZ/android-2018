@@ -20,7 +20,16 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
     private SensorManager mSensorManager;
     private Sensor mOrientationSensor;
 
+    private Sensor mAccelerometer;
+    private Sensor mMagneticFieldSensor;
+
     private CompassView mCompassView;
+
+    private float[] mGravity = new float[3];
+    private float[] mMagneticField = new float[3];
+
+    private boolean mNewGravity = false;
+    private boolean mNewMagneticField = false;
 
     public MainActivityFragment() {
     }
@@ -45,16 +54,35 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
 
         mOrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mMagneticFieldSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
+
         mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float azimuth = sensorEvent.values[0];
 
-        Log.i("Compass","Compass:"+azimuth);
+        switch(sensorEvent.sensor.getType()){
+            case Sensor.TYPE_ACCELEROMETER:
+                Log.i("Compass","Accelerometer...");
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                Log.i("Compass","Magnetic Field...");
+                break;
+            case Sensor.TYPE_ORIENTATION:
+                //float azimuth = sensorEvent.values[0];
+                //Log.i("Compass","Compass:"+azimuth);
+                //mCompassView.update(-Math.round(azimuth));
 
-        mCompassView.update(-Math.round(azimuth));
+                break;
+        }
+
+
     }
 
     @Override

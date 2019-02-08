@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class CompassView extends View {
@@ -56,8 +55,6 @@ public class CompassView extends View {
 
         canvas.translate(xcenter,ycenter);
         canvas.rotate(mAzimuth);
-
-        Log.i("Compass","Compass angle: "+mAzimuth);
 
         canvas.translate(-radius,-radius);
         canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,(int)(2*radius),(int)(2*radius)),null);
