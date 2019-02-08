@@ -79,15 +79,9 @@ public class MainActivityFragment extends Fragment implements SensorEventListene
 
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
-                
+
                 System.arraycopy(sensorEvent.values,0,mMagneticField,0,3);
                 mNewMagneticField = true;
-
-                break;
-            case Sensor.TYPE_ORIENTATION:
-                //float azimuth = sensorEvent.values[0];
-                //Log.i("Compass","Compass:"+azimuth);
-                //mCompassView.update(-Math.round(azimuth));
 
                 break;
         }
