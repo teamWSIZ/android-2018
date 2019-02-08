@@ -24,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new MainActivityFragment();
+            if(position==0)
+                return new CompassSimpleFragment();
+            else
+                return new MainActivityFragment();
         }
 
         @Override
