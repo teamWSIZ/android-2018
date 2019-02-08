@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="ic_compass_view" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/icon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>

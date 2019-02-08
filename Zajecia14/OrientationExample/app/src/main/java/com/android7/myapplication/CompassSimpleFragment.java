@@ -49,7 +49,7 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
         View view = inflater.inflate(R.layout.compass_simple, container, false);
 
         mCompassImage = view.findViewById(R.id.compass_image);
-        
+
         return view;
     }
 
@@ -99,8 +99,8 @@ public class CompassSimpleFragment extends Fragment implements SensorEventListen
 
             mCurrentAngle = newAngle;
 
-            rotacja.setFillAfter(true);
-            rotacja.setDuration(200);
+            rotacja.setFillAfter(false);
+            rotacja.setDuration(500);
 
             mCompassImage.setAnimation(rotacja);
         }
