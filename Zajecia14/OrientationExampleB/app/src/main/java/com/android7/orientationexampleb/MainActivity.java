@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean mNewMagneticField = false;
 
     private CompassView mCompassView;
+    private ImageView mCompassImage;
 
 
     @Override
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
 
         mCompassView = findViewById(R.id.compass_view);
+        mCompassImage = findViewById(R.id.compass_image);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
