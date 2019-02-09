@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float[] mGravity = new float[3];
     private float[] mMagneticField = new float[3];
 
+    private float[] mRotationMatrix = new float[9];
+    private float[] mOrientationVector = new float[3];
+
     private boolean mNewGravity = false;
     private boolean mNewMagneticField = false;
 
@@ -73,10 +76,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         if(mNewGravity&&mNewMagneticField){
-            
+            SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
+            SensorManager.getOrientation(mRotationMatrix,mOrientationVector);
         }
 
-        //mCompassView.update(-azimuth*180/(float)Math.PI);
+        mCompassView.update(-(float)Math.toDegrees(mOrientationVector[0]));
     }
 
     @Override
