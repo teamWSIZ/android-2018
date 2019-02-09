@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -30,19 +32,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private CompassView mCompassView;
     private ImageView mCompassImage;
 
+    private float mCurrentAngle = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        //mCompassView = new CompassView(this);
-
-        //setContentView(mCompassView);
-
         setContentView(R.layout.activity_main);
 
         mCompassView = findViewById(R.id.compass_view);
+
         mCompassImage = findViewById(R.id.compass_image);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
@@ -85,9 +85,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(mNewGravity&&mNewMagneticField&&redraw){
             SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
             SensorManager.getOrientation(mRotationMatrix,mOrientationVector);
-        }
 
-        mCompassView.update(-(float)Math.toDegrees(mOrientationVector[0]));
+            float angle = -(float)Math.toDegrees(mOrientationVector[0]);
+
+            mCompassView.update(angle);
+
+            RotateAnimation rotate = new RotateAnimation(mCurrentAngle,angle,Animation.RELATIVE_TO_SELF,
+                    0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+
+            mCurrentAngle = angle;
+
+            rotate.setDuration(200);
+            rotate.setFillAfter(true);
+
+            mCompassImage.clearAnimation();
+            mCompassImage.setAnimation(rotate);
+
+
+        }
     }
 
     @Override
