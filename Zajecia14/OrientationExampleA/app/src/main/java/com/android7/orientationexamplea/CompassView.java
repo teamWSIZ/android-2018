@@ -16,6 +16,9 @@ public class CompassView extends View {
 
     private Bitmap mCompassBitmap;
 
+    private Bitmap mCompassHandlebar;
+    private Bitmap mCompassCoordinates;
+
     public CompassView(Context context) {
         super(context);
 
@@ -25,6 +28,8 @@ public class CompassView extends View {
         mPaint.setAntiAlias(true);
 
         mCompassBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.compass);
+        mCompassHandlebar = BitmapFactory.decodeResource(getResources(),R.drawable.compass_handlebar_0);
+        mCompassCoordinates = BitmapFactory.decodeResource(getResources(),R.drawable.compass_coordinates);
     }
 
     @Override
@@ -45,11 +50,17 @@ public class CompassView extends View {
         canvas.save();
 
         canvas.translate(xcenter,ycenter);
+        canvas.translate(-r,-r);
+        canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,2*r,2*r),null);
+        canvas.translate(r,r);
+
         canvas.rotate(mAzimuth);
 
         canvas.translate(-r,-r);
 
-        canvas.drawBitmap(mCompassBitmap,null,new Rect(0,0,2*r,2*r),null);
+
+        canvas.drawBitmap(mCompassHandlebar,null,new Rect(0,0,2*r,2*r),null);
+        canvas.drawBitmap(mCompassCoordinates,null,new Rect(0,0,2*r,2*r),null);
 
         canvas.restore();
 
