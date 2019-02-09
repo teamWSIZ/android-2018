@@ -14,7 +14,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mOrientationSensor;
 
+    private Sensor mAccelerometer;
+    private Sensor mMagneticField;
+
     private CompassView mCompassView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //setContentView(R.layout.activity_main);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mMagneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
         mOrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mMagneticField,SensorManager.SENSOR_DELAY_GAME);
 
         mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
@@ -35,10 +46,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float azimuth = (float)(sensorEvent.values[0]);
-        Log.i("Compass","Compass: "+azimuth);
 
-        mCompassView.update(-azimuth*180/(float)Math.PI);
+        switch(sensorEvent.sensor.getType()){
+            case Sensor.TYPE_ACCELEROMETER:
+                Log.i("Compass","Accelerometer");
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                Log.i("Compass","Magnetic field");
+                break;
+            case Sensor.TYPE_ORIENTATION:
+                Log.i("Compass","Orientation");
+        }
+
+        //mCompassView.update(-azimuth*180/(float)Math.PI);
     }
 
     @Override
@@ -56,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mMagneticField,SensorManager.SENSOR_DELAY_GAME);
 
         mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
