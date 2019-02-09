@@ -14,7 +14,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mOrientationSensor;
 
+    private Sensor mAccelerometer;
+    private Sensor mMagneticFieldSensor;
+
     private CompassView mCompassView;
+
+    private float[] mGravity = new float[3];
+    private float[] mMagneticField = new float[3];
+
+    private boolean mNewGravity = false;
+    private boolean mNewMagneticField = false;
+
+    private float[] mRotationMatrix = new float[9];
+    private float[] mOrientationVector = new float[3];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +41,41 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mOrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mMagneticFieldSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
+
         mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        float azimuth = -(float)(180/Math.PI*sensorEvent.values[0]);
+        switch(sensorEvent.sensor.getType()){
+            case Sensor.TYPE_ACCELEROMETER:
+                Log.i("compass","Accelerometer");
 
-        mCompassView.update(azimuth);
+                System.arraycopy(sensorEvent.values,0,mGravity,0,3);
+                mNewGravity = true;
 
-        Log.i("Compass","Compass: "+azimuth);
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                Log.i("compass","Magnetic field");
+
+                System.arraycopy(sensorEvent.values,0,mMagneticField,0,3);
+                mNewMagneticField = true;
+
+                break;
+        }
+
+        if(mNewGravity&&mNewMagneticField){
+            SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
+            SensorManager.getOrientation(mRotationMatrix,mOrientationVector);
+
+            mCompassView.update(-(float)Math.toDegrees(mOrientationVector[0]));
+        }
 
     }
 
@@ -57,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-
-        mSensorManager.registerListener(this,mOrientationSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 }
