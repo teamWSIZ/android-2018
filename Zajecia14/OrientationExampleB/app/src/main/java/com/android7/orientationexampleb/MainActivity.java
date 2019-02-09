@@ -33,11 +33,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCompassView = new CompassView(this);
 
-        setContentView(mCompassView);
+        //mCompassView = new CompassView(this);
 
-        //setContentView(R.layout.activity_main);
+        //setContentView(mCompassView);
+
+        setContentView(R.layout.activity_main);
+
+        mCompassView = findViewById(R.id.compass_view);
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
@@ -56,9 +59,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
+        boolean redraw = false;
+
         switch(sensorEvent.sensor.getType()){
             case Sensor.TYPE_ACCELEROMETER:
-                Log.i("Compass","Accelerometer");
 
                 mNewGravity = true;
                 System.arraycopy(sensorEvent.values,0,mGravity,0,3);
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case Sensor.TYPE_MAGNETIC_FIELD:
 
                 mNewMagneticField = true;
-                Log.i("Compass","Magnetic field");
+                redraw = true;
 
                 System.arraycopy(sensorEvent.values,0,mMagneticField,0,3);
                 break;
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Log.i("Compass","Orientation");
         }
 
-        if(mNewGravity&&mNewMagneticField){
+        if(mNewGravity&&mNewMagneticField&&redraw){
             SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
             SensorManager.getOrientation(mRotationMatrix,mOrientationVector);
         }

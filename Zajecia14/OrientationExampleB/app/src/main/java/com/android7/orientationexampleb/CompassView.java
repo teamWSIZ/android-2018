@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.view.View;
 
 public class CompassView extends View {
@@ -16,9 +17,19 @@ public class CompassView extends View {
 
     private Bitmap mCompassBitmap;
 
+    public CompassView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        init();
+    }
+
     public CompassView(Context context) {
         super(context);
 
+        init();
+    }
+
+    private void init(){
         mPaint = new Paint();
         mPaint.setStrokeWidth(5);
         mPaint.setColor(Color.WHITE);
