@@ -50,17 +50,57 @@ public class CompassView extends View {
         canvas.save();
 
         canvas.translate(xcenter,ycenter);
+
         canvas.translate(-r,-r);
         canvas.drawBitmap(mCompassBackground,null,new Rect(0,0,2*r,2*r),null);
         canvas.translate(r,r);
+
+        mPaint.setColor(Color.BLUE);
+        //canvas.drawCircle(0,0,20,mPaint);
+
+        canvas.rotate(mAzimuth);
+
+        canvas.translate(200,200);
+
+        canvas.drawCircle(0,0,20,mPaint);
+
+        mPaint.setTextSize(100);
+
+        canvas.drawText("tekst",0,0,mPaint);
+
+        canvas.translate(-200,-200);
+
+        canvas.rotate(90);
+
+        canvas.translate(200,200);
+
+        canvas.drawCircle(0,0,20,mPaint);
+
+        canvas.translate(-200,-200);
+
+        canvas.rotate(90);
+
+        canvas.translate(200,200);
+
+        canvas.drawCircle(0,0,20,mPaint);
+
+        canvas.translate(-200,-200);
+
+        canvas.rotate(90);
+
+        canvas.translate(200,200);
+
+        canvas.drawCircle(0,0,20,mPaint);
+
+
 
         canvas.rotate(mAzimuth);
 
         canvas.translate(-r,-r);
 
 
-        canvas.drawBitmap(mCompassHandlebar,null,new Rect(0,0,2*r,2*r),null);
-        canvas.drawBitmap(mCompassCoordinates,null,new Rect(0,0,2*r,2*r),null);
+        //canvas.drawBitmap(mCompassHandlebar,null,new Rect(0,0,2*r,2*r),null);
+        //canvas.drawBitmap(mCompassCoordinates,null,new Rect(0,0,2*r,2*r),null);
 
         canvas.restore();
 
