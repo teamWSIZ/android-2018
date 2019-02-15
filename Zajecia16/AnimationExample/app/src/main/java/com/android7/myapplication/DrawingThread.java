@@ -1,7 +1,11 @@
 package com.android7.myapplication;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.widget.TextView;
 
 public class DrawingThread extends Thread {
@@ -13,13 +17,21 @@ public class DrawingThread extends Thread {
 
     TextView mTextView;
 
-    DrawingThread(Activity activity, TextView textView){
+    SurfaceHolder mHolder;
+
+    Paint mPaint;
+
+    DrawingThread(Activity activity, TextView textView, SurfaceHolder holder){
         mActivity = activity;
         mTextView = textView;
+
+        mHolder = holder;
 
         isWorking = true;
 
         mTextView.setText("Number: "+mNumber);
+
+        mPaint = new Paint();
     }
 
     @Override
@@ -34,11 +46,34 @@ public class DrawingThread extends Thread {
                 }
             });
 
+
+            Canvas canvas = null;
+
+            try{
+                canvas = mHolder.lockCanvas();
+
+                if(canvas!=null){
+                    draw(canvas);
+                }
+
+            }finally {
+
+                if(canvas!=null)
+                    mHolder.unlockCanvasAndPost(canvas);
+            }
+
+
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void draw(Canvas canvas){
+        mPaint.setColor(Color.GRAY);
+        canvas.drawRect(0,0,200,200,mPaint);
     }
 }
