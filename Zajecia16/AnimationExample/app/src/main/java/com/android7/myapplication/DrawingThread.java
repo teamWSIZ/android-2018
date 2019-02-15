@@ -21,6 +21,8 @@ public class DrawingThread extends Thread {
 
     Paint mPaint;
 
+    private float mAngle;
+
     DrawingThread(Activity activity, TextView textView, SurfaceHolder holder){
         mActivity = activity;
         mTextView = textView;
@@ -32,6 +34,9 @@ public class DrawingThread extends Thread {
         mTextView.setText("Number: "+mNumber);
 
         mPaint = new Paint();
+        mPaint.setTextSize(80);
+
+        mAngle = 0;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class DrawingThread extends Thread {
 
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -74,6 +79,13 @@ public class DrawingThread extends Thread {
 
     private void draw(Canvas canvas){
         mPaint.setColor(Color.GRAY);
-        canvas.drawRect(0,0,200,200,mPaint);
+        canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),mPaint);
+
+        mPaint.setColor(Color.WHITE);
+
+        canvas.translate(canvas.getWidth()/2,canvas.getHeight()/2);
+        canvas.rotate(mAngle++);
+
+        canvas.drawText("Number: "+mNumber,0,0,mPaint);
     }
 }
