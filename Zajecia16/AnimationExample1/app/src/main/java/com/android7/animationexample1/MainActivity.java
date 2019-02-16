@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
-        DrawingThread thread = new DrawingThread(textView);
+        DrawingThread thread = new DrawingThread(this,textView);
         thread.start();
     }
 }
