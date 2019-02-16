@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class DrawingThread extends Thread {
 
@@ -21,6 +22,8 @@ public class DrawingThread extends Thread {
     private Paint mPaint;
 
     float mAngle;
+
+    ArrayList<Ball> mBalls;
 
     DrawingThread(Activity activity, TextView textView, SurfaceHolder holder){
 
@@ -37,6 +40,11 @@ public class DrawingThread extends Thread {
         number = 0;
 
         mAngle = 0;
+
+        mBalls = new ArrayList<Ball>();
+
+        for(int i=0;i<100;i++)
+            mBalls.add(new Ball());
 
     }
 
@@ -92,5 +100,10 @@ public class DrawingThread extends Thread {
         mAngle++;
 
         canvas.drawText("Number: "+number,0,0,mPaint);
+
+        for(Ball ball : mBalls) {
+            ball.evaluate(1);
+            ball.draw(canvas);
+        }
     }
 }
