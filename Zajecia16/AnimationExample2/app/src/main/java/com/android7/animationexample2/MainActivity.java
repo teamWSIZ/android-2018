@@ -11,7 +11,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DrawingThread thread = new DrawingThread(this,(TextView)findViewById(R.id.textView));
+        DrawingSurface surface = findViewById(R.id.drawingSurface);
+
+        DrawingThread thread = new DrawingThread(this,(TextView)findViewById(R.id.textView),surface.getHolder());
         thread.start();
 
 
