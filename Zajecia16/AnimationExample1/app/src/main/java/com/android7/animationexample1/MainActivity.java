@@ -1,7 +1,8 @@
 package com.android7.animationexample1;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,7 +11,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DrawingThread thread = new DrawingThread();
+        TextView textView = findViewById(R.id.textView);
+
+        DrawingThread thread = new DrawingThread(textView);
         thread.start();
     }
 }
