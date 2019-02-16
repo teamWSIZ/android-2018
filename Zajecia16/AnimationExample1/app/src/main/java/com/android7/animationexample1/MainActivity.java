@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    DrawingSurface mSurface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
-        DrawingThread thread = new DrawingThread(this,textView);
+        mSurface = findViewById(R.id.drawingSurface);
+
+        DrawingThread thread = new DrawingThread(this,textView,mSurface.getHolder());
         thread.start();
     }
 }

@@ -1,7 +1,9 @@
 package com.android7.animationexample1;
 
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.widget.TextView;
 
 public class DrawingThread extends Thread {
@@ -10,14 +12,18 @@ public class DrawingThread extends Thread {
 
     Activity mActivity;
 
+    SurfaceHolder mHolder;
+
     TextView mTextView;
 
-    public DrawingThread(Activity activity, TextView textView){
+    public DrawingThread(Activity activity, TextView textView, SurfaceHolder holder){
         isWorking = true;
         number = 0;
 
         mTextView = textView;
         mActivity = activity;
+
+        mHolder = holder;
 
         mTextView.setText("Number:"+number);
     }
@@ -36,6 +42,19 @@ public class DrawingThread extends Thread {
             });
 
             number++;
+
+            Canvas canvas = null;
+
+            try {
+                canvas = mHolder.lockCanvas();
+
+                
+
+            }finally {
+                if(canvas!=null)
+                    mHolder.unlockCanvasAndPost(canvas);
+            }
+
 
             try {
                 Thread.sleep(1000);
