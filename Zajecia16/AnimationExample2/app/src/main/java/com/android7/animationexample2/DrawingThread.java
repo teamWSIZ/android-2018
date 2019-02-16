@@ -46,8 +46,6 @@ public class DrawingThread extends Thread {
 
         while(isWorking) {
 
-            Log.i("thread", "Number: "+number);
-
             mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
