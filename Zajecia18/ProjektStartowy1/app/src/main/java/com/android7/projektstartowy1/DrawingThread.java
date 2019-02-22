@@ -1,13 +1,12 @@
-package com.android7.animationsandsensors;
+package com.android7.projektstartowy1;
 
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.SurfaceHolder;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class DrawingThread extends Thread {
 
@@ -20,10 +19,6 @@ public class DrawingThread extends Thread {
     private int number;
 
     private Paint mPaint;
-
-    float mAngle;
-
-    ArrayList<Ball> mBalls;
 
     DrawingThread(Activity activity, TextView textView, SurfaceHolder holder){
 
@@ -38,14 +33,6 @@ public class DrawingThread extends Thread {
 
         isWorking = true;
         number = 0;
-
-        mAngle = 0;
-
-        mBalls = new ArrayList<Ball>();
-
-        for(int i=0;i<100;i++)
-            mBalls.add(new Ball());
-
     }
 
 
@@ -79,7 +66,7 @@ public class DrawingThread extends Thread {
             number++;
 
             try {
-                Thread.sleep(20);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -92,18 +79,12 @@ public class DrawingThread extends Thread {
 
         mPaint.setTextSize(50);
 
+        Rect bounds = new Rect();
+        mPaint.getTextBounds("Napis",0,"Napis".length(),bounds);
+
         mPaint.setColor(Color.WHITE);
 
-        canvas.translate(canvas.getWidth()/2,canvas.getHeight()/2);
-        canvas.rotate(mAngle);
 
-        mAngle++;
-
-        canvas.drawText("Number: "+number,0,0,mPaint);
-
-        for(Ball ball : mBalls) {
-            ball.evaluate(1);
-            ball.draw(canvas);
-        }
+        canvas.drawText("Text width: "+bounds.width()+" Text height:"+bounds.height(),0,bounds.height(),mPaint);
     }
 }

@@ -34,29 +34,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
 
         DrawingSurface surface = findViewById(R.id.drawingSurface);
-        mTextView = findViewById(R.id.textView);
 
-        DrawingThread thread = new DrawingThread(this, mTextView, surface.getHolder());
+        DrawingThread thread = new DrawingThread(this,(TextView)findViewById(R.id.textView),surface.getHolder());
         thread.start();
 
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagneticFieldSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-        mSensorManager.registerListener(this, mMagneticFieldSensor, SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         boolean redraw = false;
 
-        switch (sensorEvent.sensor.getType()) {
+        switch(sensorEvent.sensor.getType()){
             case Sensor.TYPE_ACCELEROMETER:
 
                 mNewGravity = true;
-                System.arraycopy(sensorEvent.values, 0, mGravity, 0, 3);
+                System.arraycopy(sensorEvent.values,0,mGravity,0,3);
 
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
@@ -64,19 +63,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 mNewMagneticField = true;
                 redraw = true;
 
-                System.arraycopy(sensorEvent.values, 0, mMagneticField, 0, 3);
+                System.arraycopy(sensorEvent.values,0,mMagneticField,0,3);
                 break;
         }
 
-        if (mNewGravity && mNewMagneticField && redraw) {
-            SensorManager.getRotationMatrix(mRotationMatrix, null, mGravity, mMagneticField);
-            SensorManager.getOrientation(mRotationMatrix, mOrientationVector);
+        if(mNewGravity&&mNewMagneticField&&redraw){
+            SensorManager.getRotationMatrix(mRotationMatrix,null,mGravity,mMagneticField);
+            SensorManager.getOrientation(mRotationMatrix,mOrientationVector);
 
-            float angleZ = -(float) Math.toDegrees(mOrientationVector[0]);
-            float angleX = -(float) Math.toDegrees(mOrientationVector[1]);
-            float angleY = -(float) Math.toDegrees(mOrientationVector[2]);
+            float angleZ = -(float)Math.toDegrees(mOrientationVector[0]);
+            float angleX = -(float)Math.toDegrees(mOrientationVector[1]);
+            float angleY = -(float)Math.toDegrees(mOrientationVector[2]);
 
-            mTextView.setText("rotation ("+angleZ+", "+angleX+", "+angleY+")");
+
+
         }
     }
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume() {
         super.onResume();
 
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-        mSensorManager.registerListener(this, mMagneticFieldSensor, SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mAccelerometer,SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mMagneticFieldSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 }
