@@ -77,14 +77,28 @@ public class DrawingThread extends Thread {
         mPaint.setColor(Color.GRAY);
         canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),mPaint);
 
+        String s0,s1,s2,s3,s4;
+
+        s0="Napis 1";
+        s1="Napis 2";
+        s2="Napis 3";
+        s3="Napis 4";
+        s4="Napis 5";
+
         mPaint.setTextSize(50);
 
         Rect bounds = new Rect();
-        mPaint.getTextBounds("Napis",0,"Napis".length(),bounds);
+        mPaint.getTextBounds(s0,0,s0.length(),bounds);
 
         mPaint.setColor(Color.WHITE);
 
+        float y = 0+20;
 
-        canvas.drawText("Text width: "+bounds.width()+" Text height:"+bounds.height(),0,bounds.height(),mPaint);
+        y=bounds.height();
+
+        canvas.drawText(s0+"  Text width: "+bounds.width()+" Text height:"+bounds.height(),0,y,mPaint);
+
+
+        //canvas.drawText("Text width: "+bounds.width()+" Text height:"+bounds.height(),0,bounds.height(),mPaint);
     }
 }
